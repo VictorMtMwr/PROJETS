@@ -1,0 +1,203 @@
+class Patient():
+    """
+        Class used to represent a Patient
+    """
+
+    def __init__(self):
+        self.listID = []
+        self.listName = []
+        self.listSex = []
+        self.listDateB = []
+        self.listArterial = []
+        self.listArterial2 = []
+        self.listTemperature = []
+        self.listSaturation = []
+        self.listFrecuency = []
+        self.listEvolution = []
+        self.listDiagnosticimages = []
+        self.listExamResults = []
+        self.listPrescriptionDrugs = []
+
+    def validate_date_format(
+            self, date_str):
+        components = date_str.split('/')
+        if len(components) != 3:
+            return False
+        day, month, year = components
+        if not (day.isdigit() and month.isdigit() and year.isdigit()):
+            return False
+        day = int(day)
+        month = int(month)
+        year = int(year)
+        if not (1 <= day <= 31 and 1 <= month <= 12 and 0 <= year <= 99):
+            return False
+        return True
+
+    def determineDiseases(self, presion, presion2):
+        if (presion >= 130 and presion2 >= 80):
+            print("Hipertension arterial")
+
+    def inputData(self):
+        self.ID = str(
+            input(
+                "Digite el numero de cedula del paciente a ingresar: "
+                )
+            )
+        self.Name = str(
+            input(
+                "Digite el nombre del paciente: "
+                )
+            )
+        while True:
+            self.Sex = str(input("Sexo M/F: "))
+            if self.Sex.upper() == "M" or self.Sex.upper() == "F":
+                break
+            else:
+                print("Sexo inválido. Por favor, ingrese M o F.")
+        while True:
+            self.dateB = str(input("Fecha de nacimiento (DD/MM/AA): "))
+            if self.validate_date_format(self.dateB):
+                break
+            else:
+                print(
+                    "Formato de fecha inválido. "
+                    "Ingrese en el formato DD/MM/AA: "
+                    )
+        self.arterialPresion = int(
+            input(
+                "Digite la presion arterial del paciente: "
+                )
+            )
+        self.arterialPresion2 = int(
+            input(
+                "/ "
+                )
+            )
+        self.temperature = int(
+            input(
+                "Digite la temperatura del paciente: "
+                )
+            )
+        self.saturation = int(
+            input(
+                "Digite el numero de saturacion de O2 del paciente en %: "
+                )
+            )
+        self.frecuency = int(
+            input(
+                "Digite la frecuencia respiratoria del paciente: "
+                )
+            )
+        self.notes = str(
+            input(
+                "Notas de evolucion del paciente: "
+                )
+            )
+        self.diagnosticImage = str(
+            input(
+                "Imagenes diagnosticas realizadas al paciente: "
+                )
+            )
+        self.examResults = str(
+            input(
+                "Resultados de los examenes realizados al paciente: "
+                )
+            )
+        self.prescriptionDrugs = str(
+            input(
+                "Medicamentos formulados al paciente: "
+                )
+            )
+        self.listID.append(
+            self.ID
+            )
+        self.listName.append(
+            self.Name
+            )
+        self.listSex.append(
+            self.Sex
+            )
+        self.listDateB.append(
+            self.dateB
+            )
+        self.listArterial.append(
+            self.arterialPresion
+            )
+        self.listArterial2.append(
+            self.arterialPresion2
+            )
+        self.listTemperature.append(
+            self.temperature
+            )
+        self.listSaturation.append(
+            self.saturation
+            )
+        self.listFrecuency.append(
+            self.frecuency
+            )
+        self.listEvolution.append(
+            self.notes
+            )
+        self.listDiagnosticimages.append(
+            self.diagnosticImage
+            )
+        self.listExamResults.append(
+            self.examResults
+            )
+        self.listPrescriptionDrugs.append(
+            self.prescriptionDrugs
+            )
+
+    def searchData(self):
+        searcher = input("Digite el numero de cedula del paciente: ")
+        if searcher in self.listID:
+            index = self.listID.index(searcher)
+            print("__________________________________________________")
+            print("****************HISTORIA CLINICA******************")
+            print("Paciente encontrado:")
+            print("ID:", self.listID[index])
+            print("Nombre:", self.listName[index])
+            print("Sexo:", self.listSex[index])
+            print("Fecha de nacimiento:", self.listDateB[index])
+            print("Presión arterial:", self.listArterial[index])
+            print("Temperatura:", self.listTemperature[index])
+            print("Saturación de O2:", self.listSaturation[index])
+            print("Frecuencia cardiaca:", self.listFrecuency[index])
+            print("Evolución:", self.listEvolution[index])
+            print("Imagenes diagnósticas:", self.listDiagnosticimages[index])
+            print("Resultados de exámenes:", self.listExamResults[index])
+            print("Medicamentos recetados:", self.listPrescriptionDrugs[index])
+            self.determineDiseases(self.listArterial[index],
+                                   self.listArterial2[index])
+            print("__________________________________________________")
+        else:
+            print("__________________________________________________")
+            print("Usuario no encontrado. Intente nuevamente")
+            print("__________________________________________________")
+
+    def main(self):
+        res = 0
+        while res == 0:
+            print("__________________________________________________")
+            print("****Hospital San Vicente****")
+            print("1. REGISTRO DE PACIENTE   ")
+            print("2. BUSCAR PACIENTE        ")
+            print("3. SALIR                  ")
+            res = int(input("Digite una opcion: "))
+            print("__________________________________________________")
+            if res == 1:
+                self.inputData()
+                res = 0
+            elif res == 2:
+                self.searchData()
+                res = 0
+            elif res == 3:
+                break
+            else:
+                print("******RESPUETA INVALIDA INTENTE NUEVAMENTE********")
+                res = 0
+
+
+if __name__ == '__main__':
+    objeto = Patient()
+    objeto.main()
