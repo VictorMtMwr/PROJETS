@@ -1,7 +1,13 @@
+import datetime
+
+
 class Patient:
     def __init__(self, ID, Name, Sex, dateB, arterialPresion, arterialPresion2,
                  temperature, saturation, frecuency, notes, diagnosticImage,
                  examResults, prescriptionDrugs):
+        """
+            Constructor method by Patient class.
+        """
         self.ID = ID
         self.Name = Name
         self.Sex = Sex
@@ -20,6 +26,10 @@ class Patient:
         self.antecedents = []
 
     def input_data(self):
+        """
+            This method allows the user to enter all the necessary
+            data to build his medical history.
+        """
         print("****************REGISTRAR PACIENTES****************")
         ID = str(input("Digite el numero de cedula del paciente a ingresar: "))
         Name = str(input("Digite el nombre del paciente: "))
@@ -61,9 +71,13 @@ class Patient:
                           prescriptionDrugs)
 
         self.patient_list.append(patient)
+        Patient.fecha_in = datetime.datetime.now()
         patient.determine_diseases()
 
     def validate_date_format(self, date_str):
+        """
+            This method allows validating the format of the dates
+        """
         components = date_str.split('/')
         if len(components) != 3:
             return False
@@ -78,6 +92,10 @@ class Patient:
         return True
 
     def determine_diseases(self):
+        """
+            This method allows to determine from the vital
+            signs the possible chronic diseases of a patient
+        """
         print("El paciente puede sufrir las"
               " siguientes enfermedades cronicas: ")
         if self.arterialPresion >= 130 and self.arterialPresion2 >= 80:
@@ -99,6 +117,10 @@ class Patient:
             return None
 
     def print_antecedents(self):
+        """
+            This method allows showing who are the
+            patients with chronic diseases.
+        """
         if self.antecedents:
             print("Pacientes con enfermedades crónicas:")
             for patient_id in self.antecedents:

@@ -4,11 +4,18 @@ from patient import Patient
 class Beds():
 
     def __init__(self,):
+        """
+        Constructor method by Beds class.
+        """
         self.numberBeds = 300
         self.percentOcupation = 0
         Patient.validate_date_format()
 
     def nBeds(self, patient_list):
+        """
+            This method determines the availability
+            of beds and hospital occupancy.
+        """
         self.numberBeds = 300 - len(patient_list)
         print("****Hospital San Vicente****")
         print("Hay ", self.numberBeds,
@@ -17,9 +24,11 @@ class Beds():
         print("El porcentaje de ocupacion "
               "de camas es: ", round(percentOcupation, 2), "%")
 
-    def out(self):
+    def out(self, searcher):
+        """
+            This method allows to discharge a patient.
+        """
         print("********DAR DE ALTA A UN PACIENTE**********")
-        searcher = input("Digite el numero de cedula del paciente: ")
         found = False
         for patient in self.patient_list:
             if patient.ID == searcher:
